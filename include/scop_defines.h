@@ -13,10 +13,10 @@
 #ifndef SCOP_DEFINES_H
 # define SCOP_DEFINES_H
 
-# define OBJ_AM 3
 # define V_AM 0
 # define VT_AM 1
-# define F_AM = 2
+# define F_AM 2
+# define OBJ_AM 3
 
 # define OK 0
 # define WTF 1

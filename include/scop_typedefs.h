@@ -32,7 +32,7 @@ typedef int			t_face[][2];
 typedef struct		s_object
 {
 	t_list			*v;
-	t_list			*tv;
+	t_list			*vt;
 	t_list			*f;
 }					t_object;
 

@@ -16,13 +16,16 @@ void		free_2darr(void **arr)
 {
 	size_t	i;
 
-	i = 0;
-	while (arr[i])
+	if (arr)
 	{
-		free(arr[i]);
-		i++;
+		i = 0;
+		while (arr[i])
+		{
+			free(arr[i]);
+			i++;
+		}
+		free(arr);
 	}
-	free(arr);
 }
 
 size_t		get_2d_arr_size(void **arr)

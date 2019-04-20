@@ -6,50 +6,35 @@
 /*   By: adzikovs <adzikovs@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 12:29:59 by adzikovs          #+#    #+#             */
-/*   Updated: 2019/04/13 13:41:32 by adzikovs         ###   ########.fr       */
+/*   Updated: 2019/04/20 09:20:49 by adzikovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "scop_typedefs.h"
 
-int				read_v(char **words, t_object *res, int obj_am[OBJ_AM])
+int				read_v(char *str, t_object *res, int obj_am[OBJ_AM])
 {
 	t_vec3		v;
 
-	if (get_2d_arr_size((void**)words) != 4 &&
-		get_2d_arr_size((void**)words) != 5)
+	if (sscanf(str, "v %f %f %f", v, v + 1, v + 2) != 3)
 		return (WTF);
-	v[0] = (dt)atof(words[1]);
-	v[1] = (dt)atof(words[2]);
-	v[2] = (dt)atof(words[3]);
 	t_list_copy_push_back(&res->v, v, sizeof(v));
 	obj_am[V_AM]++;
 	return (OK);
 }
 
-int				read_vt(char **words, t_object *res, int obj_am[OBJ_AM])
+int				read_vt(char *str, t_object *res, int obj_am[OBJ_AM])
 {
-	t_vec3		v;
-	size_t		size;
+	t_vec3		vt;
+	int			size;
 
-	if (get_2d_arr_size((void**)words) < 2 ||
-		get_2d_arr_size((void**)words) > 4)
+	size = sscanf(str, "v %f %f", vt, vt + 1);
+	if (size <= 0 || size > 2)
 		return (WTF);
-	v[0] = (dt)atof(words[1]);
-	size = sizeof(dt);
-	if (get_2d_arr_size((void**)words) > 2)
-	{
-		v[1] = (dt)atof(words[2]);
-		size += sizeof(dt);
-	}
-	if (get_2d_arr_size((void**)words) > 3)
-	{
-		v[2] = (dt)atof(words[3]);
-		size += sizeof(dt);
-	}
-	t_list_copy_push_back(&res->v, v, size);
+	t_list_copy_push_back(&res->vt, vt, (size_t)size * sizeof(*vt));
 	obj_am[VT_AM]++;
 	return (OK);
 }
